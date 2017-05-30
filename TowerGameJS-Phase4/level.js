@@ -56,16 +56,24 @@ class Level2 extends Level{
       }
     }
     // draw the towers
-    for (let i = 0; i < this.game.towers.length; i++) {
-      this.game.towers[i].run();
-    }
     for (let i = 0; i < this.game.enemies.length; i++) {
       this.game.enemies[i].run();
+    }
+    for (let i = 0; i < this.game.towers.length; i++) {
+      this.game.towers[i].run();
     }
     for (let i = 0; i < this.game.bullets.length; i++) {
       this.game.bullets[i].run();
     }
-
+    for(let i = 0; i < this.game.explosiveBullets.length; i++){
+     this.game.explosiveBullets[i].run();
+     console.log("expexp");
+   }
+   for (let i = 0; i < this.game.rays.length; i++) {
+     this.game.rays[i].run();
+   }
+   if(this.game.enemies.length == 0)
+      this.game.explosiveBullets = [];
     // some help text in the bottom left of the canvas
     this.game.context.save();
     this.game.context.fillStyle = "white";
