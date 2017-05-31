@@ -542,6 +542,8 @@ class Game {
       else {
         println('failed to make tower');
       }
+    } else {
+      alert("Insufficient Funds!");
     }
   }
 
