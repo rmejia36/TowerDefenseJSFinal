@@ -361,17 +361,57 @@ class Game {
                 }
             if(j < 3) { // if we found a valid cell to start the enemy
                 let randomPath = Math.floor(Math.random() * 2);    // about half
-                this.enemies.push(new Enemy(this, startCell, randomPath));
+            //    this.enemies.push(new Enemy(this, startCell, randomPath));
+                console.log("push enemy");
                 }
             }
     }
     controlWaves() {
       if(this.wave.isWaveOver()){
         this.currentWaveNum+=1
+
         this.wave=new Wave(this,AllWaves[this.currentWaveNum])
       }else{
-        this.wave.run()
+        this.wave.run();
+        if(this.currentWaveNum > 2){
+          if(this.timeSpawn > 0 && this.enemies.length == 0 && this.checkOnce){
+              this.enemyNum += 3;
+              this.enemyTwoNum +=2;
+              console.log(this.wave);
+      //if(this.wave > 4){
+            this.enemyThreeNum += 1;
+            this.enemyFourNum += 1;
+            this.enemyFiveNum += 1;
+    //  }
+          this.checkOnce = false;
+          this.i = 0;
+        }
       }
+    }
+  }
+    addEnemiesFive(){
+        this.enemies.push(new YellowEnemy(this, this.grid[0][0], 0));
+        //this.fullEnemyArray.push(new YellowEnemy(this, this.grid[0][0], 0));
+        console.log("five");
+    }
+    addEnemiesFour(){
+        this.enemies.push(new PurpleEnemy(this, this.grid[0][0], 0));
+      //  this.fullEnemyArray.push(new PurpleEnemy(this, this.grid[0][0], 0));
+        console.log("four");
+    }
+    addEnemiesThree(){
+        this.enemies.push(new RedEnemy(this, this.grid[0][0], 0));
+        //this.fullEnemyArray.push(new RedEnemy(this, this.grid[0][0], 0));
+        console.log("three");
+    }
+    addEnemiesTwo(){
+      this.enemies.push(new GreenEnemy(this, this.grid[0][0], 0));
+      //this.fullEnemyArray.push(new GreenEnemy(this, this.grid[0][0], 0));
+    }
+    addEnemies(){
+      this.checkOnce = true;
+      this.enemies.push(new Enemy(this, this.grid[0][0], 0));
+
     }
     // Delete any enemies that have died
     removeEnemies() {
