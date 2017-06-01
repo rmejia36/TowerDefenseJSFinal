@@ -20,7 +20,7 @@ class Explosives{
     ctx.fillStyle = 'orange';
    // console.log(this.loc);
     ctx.beginPath();
-    if(this.radius <= 16){
+    if(this.radius <= 22){
      this.radius += 2;
 
     }  else {
