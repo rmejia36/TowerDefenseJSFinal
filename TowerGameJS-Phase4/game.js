@@ -22,7 +22,6 @@ function setup() {
   window.setTimeout(draw, 100);    // wait 100ms for resources to load then start draw loop
 
   //panelthings
-
 }
 
 function draw() {   // the animation loop
@@ -45,6 +44,10 @@ class Game {
     this.explosiveBullets = [];
     this.bankValue = 500;
     this.rays = [];
+
+    this.wallCost = 2;
+
+
     this.loadEnemyImages();
     this.score = 0;
     this.wave = 0;
@@ -327,7 +330,13 @@ class Game {
         }
       }else{
         return function() {
-          cell.occupied= !cell.occupied
+          if (cell.occupied){
+            cell.occupied = false;
+            towerGame.bankValue += towerGame.wallCost;
+          } else {
+            cell.occupied = true;
+            towerGame.bankValue -= towerGame.wallCost;
+          }
           alert("performing that action would create an invalid grid")
         }
       }
@@ -556,6 +565,8 @@ class Game {
       else {
         println('failed to make tower');
       }
+    } else {
+      alert("Insufficient Funds!");
     }
   }
 
@@ -639,7 +650,15 @@ class Game {
     }
     else if(!towerGame.placingTower && !cell.hasTower) {
         // toggle the occupied property of the clicked cell
-        cell.occupied = !cell.occupied;
+
+        if (!cell.occupied && towerGame.bankValue >= towerGame.wallCost){
+            towerGame.bankValue -= towerGame.wallCost;
+            cell.occupied = true;
+        } else {
+            towerGame.bankValue += towerGame.wallCost;
+            cell.occupied = false;
+        }
+
         towerGame.brushfire(towerGame.undo(cell));   // all new distances and parents
         }
   }
