@@ -41,7 +41,7 @@ class Wave {
         // will caculate row and column within the range specified by JSON file
         let row = Math.floor(Math.floor(Math.random()*(game.rows*(enemyJSON.enemyPosition[1][1]-enemyJSON.enemyPosition[1][0])))+game.rows*enemyJSON.enemyPosition[1][0]);
         let col = Math.floor(Math.floor(Math.random()*(game.cols*(enemyJSON.enemyPosition[0][1]-enemyJSON.enemyPosition[0][0])))+game.cols*enemyJSON.enemyPosition[0][0]);
-        var startCell = this.game.grid[col][row];
+        var startCell = this.game.grid[0][0];
         if(startCell && startCell.parent)   // must have a parent to have any path
         break;
       }
