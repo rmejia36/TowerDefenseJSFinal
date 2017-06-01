@@ -44,7 +44,8 @@ class Game {
     this.explosiveBullets = [];
     this.bankValue = 500;
     this.rays = [];
-
+    this.checkOnce = true;
+    this.enemyNum = 20;
     this.wallCost = 2;
 
 
@@ -74,8 +75,8 @@ class Game {
     this.canvas.addEventListener('click', this.handleCNVMouseClicked, false);
 
     window.addEventListener('keypress', function(evt) {
-        if(evt.key == "E" || evt.key == "e")
-            towerGame.sendEnemies();
+        if(evt.key == "E" || evt.key == "e"){}
+
         }, false);
     this.currentWaveNum=0
     this.wave=new Wave(this,AllWaves[this.currentWaveNum])
@@ -367,28 +368,36 @@ class Game {
             }
     }
     controlWaves() {
+      if(this.enemies.length == 0)
+        this.checkOnce = true;
       if(this.wave.isWaveOver()){
         this.currentWaveNum+=1
 
         this.wave=new Wave(this,AllWaves[this.currentWaveNum])
       }else{
+        if(this.currentWaveNum < 1)
         this.wave.run();
-        if(this.currentWaveNum > 2){
+        else
+        if(this.checkOnce){
+          console.log("hihih");
+        this.loadEnemies();
+        this.checkOnce = false;
+        this.enemyNum +=5;
+      }
+        /*
+        if(this.currentWaveNum > 1){
           if(this.timeSpawn > 0 && this.enemies.length == 0 && this.checkOnce){
               this.enemyNum += 3;
-              this.enemyTwoNum +=2;
-              console.log(this.wave);
-      //if(this.wave > 4){
-            this.enemyThreeNum += 1;
-            this.enemyFourNum += 1;
-            this.enemyFiveNum += 1;
+
     //  }
           this.checkOnce = false;
           this.i = 0;
-        }
+        } */
       }
-    }
+
+
   }
+  /*
     addEnemiesFive(){
         this.enemies.push(new YellowEnemy(this, this.grid[0][0], 0));
         //this.fullEnemyArray.push(new YellowEnemy(this, this.grid[0][0], 0));
@@ -407,10 +416,58 @@ class Game {
     addEnemiesTwo(){
       this.enemies.push(new GreenEnemy(this, this.grid[0][0], 0));
       //this.fullEnemyArray.push(new GreenEnemy(this, this.grid[0][0], 0));
-    }
+    } */
     addEnemies(){
-      this.checkOnce = true;
+      //this.checkOnce = true;
       this.enemies.push(new Enemy(this, this.grid[0][0], 0));
+
+    }
+
+    loadEnemies(){
+      for(var i = 0; i < this.enemyNum; i++){
+        setTimeout(function(){
+          towerGame.addEnemies();
+        }, 800 * i);
+
+    }
+
+    /*
+    if(this.enemyTwoNum > 0){
+    for(var i = 0; i < this.enemyTwoNum; i++){
+      setTimeout(function(){
+        towerGame.addEnemiesTwo();
+      }, 200 * i);
+
+  }
+}
+
+if(this.enemyThreeNum > 0){
+  for(var i = 0; i < this.enemyThreeNum; i++){
+    setTimeout(function(){
+      towerGame.addEnemiesThree();
+    }, 200 * i);
+
+  }
+}
+if(this.enemyFourNum > 0){
+  console.log("purps");
+  for(var i = 0; i < this.enemyFourNum; i++){
+    setTimeout(function(){
+      towerGame.addEnemiesFour();
+    }, 200 * i);
+
+  }
+}
+if(this.enemyFiveNum > 0){
+  for(var i = 0; i < this.enemyFiveNum; i++){
+    setTimeout(function(){
+      towerGame.addEnemiesFive();
+    }, 200 * i);
+
+  }
+}
+*/
+    this.timeSpawn++;
 
     }
     // Delete any enemies that have died
