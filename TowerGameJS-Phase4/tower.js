@@ -20,7 +20,7 @@ class Tower {
     if(ability == "freeze")
     this.coolDown = 3000;
   else if(ability == "normal" || ability == "explosive")
-    this.coolDown = 600;
+    this.coolDown = 2000;
   else if(ability == "fast")
     this.coolDown = 200;
   else
@@ -69,9 +69,9 @@ class Tower {
           // reset lastTime to current time
           this.lastTime = millis;
           let bulletLocation = vector2d(this.loc.x, this.loc.y);
-          console.log(this.ability);
+        //  console.log(this.ability);
           let b = new Bullet(bulletLocation , this.bulletImg, this.towAngle, this.ability);
-          towerGame.bullets.push(b);
+        //  towerGame.bullets.push(b);
           if(this.ability != "freeze" && this.ability != "ray"){
             console.log("shoot");
             towerGame.bullets.push(b);
@@ -84,9 +84,9 @@ class Tower {
       if( k < 300 && towerGame.enemies.length != 0 && this.target.x != towerGame.canvas.mouseX){
       var rys = new LockOn(this.loc, this.target);
       rys.run();
-        console.log(this.findEnemyIndex());
+      //  console.log(this.findEnemyIndex());
       if(this.findEnemyIndex() < towerGame.enemies.length)
-
+        console.log(this.findEnemyIndex());
         towerGame.enemies[this.findEnemyIndex()].isLocked = true;//health -=  10;
       } else {
         towerGame.rays = [];

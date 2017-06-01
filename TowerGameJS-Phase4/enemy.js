@@ -16,8 +16,8 @@ class Enemy {
     this.coolDown = 1000;
     this.towerLoc =  vector2d(0, 0);
     this.velVec;
-    this.increasedDamg = 10;
-    this.health = 100;
+    this.increasedDamg = 18;
+    this.health = 200;
     this.slowVel= this.initialVel - .8;
       // velocity factor
       this.damages = 0;
@@ -179,15 +179,16 @@ class Enemy {
       if(this.checkCollide(this, towerGame.bullets[h])){
         if(towerGame.bullets[h].ability == "normal"){
           //this.health = this.health - 100;
-          this.health = this.health - 100;
+          this.health = this.health - 200;
           //console.log(this.health)
           towerGame.bullets.splice(h, 1);
         } else if(towerGame.bullets[h].ability == "fast"){
-          this.health = this.health - 200;
+          this.health = this.health - 100;
         //  console.log(this.health)
           towerGame.bullets.splice(h, 1);
         }else if(towerGame.bullets[h].ability == "explosive"){
             console.log("idk");
+            this.health = this.health - 10;
           //this.health = this.health - 10;
           if(this.health <= 0){
             this.kill = true;
@@ -212,8 +213,8 @@ class Enemy {
 
 
     for(let i = 0; i < towerGame.explosiveBullets.length; i++){
-      if(this.loc.dist(towerGame.explosiveBullets[i].loc) < 30){
-        this.health = this.health -10;
+      if(this.loc.dist(towerGame.explosiveBullets[i].loc) < 40){
+        this.health = this.health - 30;
       }
       if(towerGame.explosiveBullets[i].kills == true ){
         towerGame.explosiveBullets.splice(i, 1);
