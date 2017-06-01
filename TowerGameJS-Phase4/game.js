@@ -397,7 +397,7 @@ class Game {
   }
   updateInfoElements(time){
     let infoElements = document.getElementById('infoDiv').getElementsByClassName('infoTileDiv');
-    for(let i = 0; i < infoElements.length; i++){
+    for(let i = 0; i < infoElements.length - 1; i++){
       let info = infoElements[i];
       // change the html content after condition--use indexOf
       if(info.innerHTML.indexOf('Bank') != -1){
@@ -418,6 +418,12 @@ class Game {
         info.innerHTML = 'Health <br/>' + this.health;
       }
     }
+  }
+
+  updateCostInfoElement(value) {
+    let infoElements = document.getElementById('infoDiv').getElementsByClassName('infoTileDiv');
+    let info = infoElements[infoElements.length-1];
+    info.innerHTML = 'Cost <br/>' + value;
   }
 
   updateGameTime(){
@@ -601,10 +607,12 @@ class Game {
   //+++++++++++++++++++++++++   tile menu callbacks
   tileRollOver() {
     this.style.backgroundColor = '#f7e22a';
+    towerGame.updateCostInfoElement(this.cost);
   }
 
   tileRollOut() {
     this.style.backgroundColor = '#DDD';
+    towerGame.updateCostInfoElement("");
   }
 
   tilePressed() {
