@@ -17,7 +17,7 @@ class Explosives{
   }
   render(){
     var ctx = towerGame.context;
-    ctx.fillStyle = 'green';
+    ctx.fillStyle = 'orange';
    // console.log(this.loc);
     ctx.beginPath();
     if(this.radius <= 16){
