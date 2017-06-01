@@ -31,6 +31,20 @@ body{
   height:750px;
   float:left;
 }
+.loader {
+  margin: auto;
+  margin-top: 25%;
+    border: 16px solid black; /* Light grey */
+    border-top: 16px solid grey; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 
 .infoTileDiv{

@@ -19,6 +19,10 @@ var ssImage;
  }
 function setup() {
   towerGame = new Game();
+  var wrap = document.getElementById('wrapperDiv');
+  var load = document.getElementById('loader')
+  load.style.display = 'none';
+  wrap.style.display = 'block';
   window.setTimeout(draw, 100);    // wait 100ms for resources to load then start draw loop
   towerGame.backgroundMusic.play();
   //panelthings
