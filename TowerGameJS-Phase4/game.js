@@ -20,7 +20,7 @@ var ssImage;
 function setup() {
   towerGame = new Game();
   window.setTimeout(draw, 100);    // wait 100ms for resources to load then start draw loop
-
+  towerGame.backgroundMusic.play();
   //panelthings
 }
 
@@ -47,6 +47,7 @@ class Game {
 
     this.wallCost = 2;
 
+    this.backgroundMusic = new Audio('Elevator Music 1.mp3')
 
     this.loadEnemyImages();
     this.score = 0;
