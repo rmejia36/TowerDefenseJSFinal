@@ -72,7 +72,7 @@ class Tower {
           console.log(this.ability);
           let b = new Bullet(bulletLocation , this.bulletImg, this.towAngle, this.ability);
           towerGame.bullets.push(b);
-          if(this.ability != "freeze"){
+          if(this.ability != "freeze" && this.ability != "ray"){
             console.log("shoot");
             towerGame.bullets.push(b);
       }

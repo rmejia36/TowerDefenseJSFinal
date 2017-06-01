@@ -98,7 +98,7 @@ class Enemy {
     // find a new target and rotate the velocity in the direaction
     // of the new target.
     checkCollide(shape1, shape2) {
-      
+
       if(shape1.shape === "circle") {
         if(shape2.shape === "circle") {
           //circle-circle
@@ -241,8 +241,7 @@ class Enemy {
 
 
 
-    this.velVec  = this.targetVec.copy().normalize().scale(this.vel);
-    if(this.loc.dist(this.target) <= this.vel*4) {    // if we have reached the current target
+  if(this.loc.dist(this.target) <= this.vel) {    // if we have reached the current target
         this.currentCell = this.targetCell;
         if(this.currentCell == this.game.root) {   // we have reached the end of the path
             this.kill = true;
@@ -268,8 +267,9 @@ class Enemy {
         // now rotate the current velocity in the direction of the targetAngle
         // a little at a time
         this.velVec.rotate(angleBetween/2);
+        this.angle=this.velVec.angle();
         }
-    this.loc.add(this.velVec);          // apply velocity to location
+    this.loc.add(this.velVec);       // apply velocity to location
   }
 
 } // end class ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
