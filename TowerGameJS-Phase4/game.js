@@ -41,9 +41,12 @@ class Game {
     this.towers = [];
     this.enemies = [];
     this.bullets = [];
-
+    this.explosiveBullets = [];
     this.bankValue = 500;
+    this.rays = [];
+
     this.wallCost = 2;
+
 
     this.loadEnemyImages();
     this.score = 0;
@@ -471,7 +474,27 @@ class Game {
     var buttons = ["B10000", "B20000", "B30000", "B40000", "B50000", "B60000"];
     //  loop through the towers and DO NOT include wall element
     for(var i = 0; i < 5; i++){
-      var mtd = document.createElement("div"); // createDiv("");
+      var mtd = document.createElement("div");
+      if(i == 0){
+      mtd.ability = "normal";
+//        this.bankValue = 200;
+
+    } else if(i == 1){
+      mtd.ability = "fast";
+    //  this.bankValue = 500;
+
+    } else if(i == 2){
+      mtd.ability = "freeze";
+    //  this.bankValue = 300;
+
+    } else if(i == 3){
+      mtd.ability = "explosive";
+    //  this.bankValue = 700;
+
+    } else {
+      mtd.ability = "ray";
+    //  this.bankValue = 1000;
+    }// createDiv("");
 
       /*
       var h5 = document.createTextNode("Cost");
@@ -536,7 +559,7 @@ class Game {
     console.log("Bankvalue = " + this.bankValue);
     console.log("Cost = " + mtd.cost);
     if(this.bankValue >= mtd.cost){
-      var tower = new Tower( mtd.cost, mtd.cnvTurImg, mtd.cnvBulImg);
+      var tower = new Tower( mtd.cost, mtd.cnvTurImg, mtd.cnvBulImg, mtd.ability);
       if(tower)
         this.towers.push(tower); // add tower to the end of the array of towers
       else {
