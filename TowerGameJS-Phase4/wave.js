@@ -103,7 +103,7 @@ AllWaves=[
             0
           ]
         },
-        "num":10,
+        "num":15,
         "enemyIncrement":.3,
         "packetIncrement":1
       }
@@ -128,7 +128,7 @@ AllWaves=[
             1
           ]
         },
-        "num":10,
+        "num":20,
         "enemyIncrement":.1,
         "packetIncrement":1
       },
@@ -147,7 +147,7 @@ AllWaves=[
             0
           ]
         },
-        "num":10,
+        "num":30,
         "enemyIncrement":1,
         "packetIncrement":1
       }
@@ -191,7 +191,7 @@ AllWaves=[
             0
           ]
         },
-        "num":10,
+        "num":40,
         "enemyIncrement":1,
         "packetIncrement":1
       }

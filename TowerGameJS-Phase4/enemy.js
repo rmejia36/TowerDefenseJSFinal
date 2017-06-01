@@ -17,7 +17,7 @@ class Enemy {
     this.towerLoc =  vector2d(0, 0);
     this.velVec;
     this.increasedDamg = 10;
-    this.health = 100;
+    this.health = 250;
     this.slowVel= this.initialVel - .8;
       // velocity factor
       this.damages = 0;
@@ -183,7 +183,7 @@ class Enemy {
           //console.log(this.health)
           towerGame.bullets.splice(h, 1);
         } else if(towerGame.bullets[h].ability == "fast"){
-          this.health = this.health - 200;
+          this.health = this.health - 75;
         //  console.log(this.health)
           towerGame.bullets.splice(h, 1);
         }else if(towerGame.bullets[h].ability == "explosive"){
