@@ -9,19 +9,26 @@ var cellId = 0;
 
 var bsImage;
 var ssImage;
+var load = document.getElementById('loader');
+var wrap;
 
  function loadImages(){
    bsImage = new Image();
   bsImage.src = "resources/images/buttons.png";
    ssImage = new Image();
    ssImage.src = "resources/images/spritesheet.png";
-   window.setTimeout(setup, 100);
+   window.setTimeout(setup, 1500);
  }
 function setup() {
+  wrap = document.getElementById('wrapperDiv');
+  load.style.display = 'none';
+  wrap.style.display = 'block';
+
   towerGame = new Game();
   window.setTimeout(draw, 100);    // wait 100ms for resources to load then start draw loop
-  towerGame.backgroundMusic.play();
+
   //panelthings
+
 }
 
 function draw() {   // the animation loop
@@ -41,13 +48,8 @@ class Game {
     this.towers = [];
     this.enemies = [];
     this.bullets = [];
-    this.explosiveBullets = [];
+
     this.bankValue = 500;
-    this.rays = [];
-
-    this.wallCost = 2;
-
-    this.backgroundMusic = new Audio('Elevator Music 1.mp3')
 
     this.loadEnemyImages();
     this.score = 0;
@@ -331,13 +333,7 @@ class Game {
         }
       }else{
         return function() {
-          if (cell.occupied){
-            cell.occupied = false;
-            towerGame.bankValue += towerGame.wallCost;
-          } else {
-            cell.occupied = true;
-            towerGame.bankValue -= towerGame.wallCost;
-          }
+          cell.occupied= !cell.occupied
           alert("performing that action would create an invalid grid")
         }
       }
@@ -398,7 +394,7 @@ class Game {
   }
   updateInfoElements(time){
     let infoElements = document.getElementById('infoDiv').getElementsByClassName('infoTileDiv');
-    for(let i = 0; i < infoElements.length - 1; i++){
+    for(let i = 0; i < infoElements.length; i++){
       let info = infoElements[i];
       // change the html content after condition--use indexOf
       if(info.innerHTML.indexOf('Bank') != -1){
@@ -419,12 +415,6 @@ class Game {
         info.innerHTML = 'Health <br/>' + this.health;
       }
     }
-  }
-
-  updateCostInfoElement(value) {
-    let infoElements = document.getElementById('infoDiv').getElementsByClassName('infoTileDiv');
-    let info = infoElements[infoElements.length-1];
-    info.innerHTML = 'Cost <br/>' + value;
   }
 
   updateGameTime(){
@@ -481,27 +471,7 @@ class Game {
     var buttons = ["B10000", "B20000", "B30000", "B40000", "B50000", "B60000"];
     //  loop through the towers and DO NOT include wall element
     for(var i = 0; i < 5; i++){
-      var mtd = document.createElement("div");
-      if(i == 0){
-      mtd.ability = "normal";
-//        this.bankValue = 200;
-
-    } else if(i == 1){
-      mtd.ability = "fast";
-    //  this.bankValue = 500;
-
-    } else if(i == 2){
-      mtd.ability = "freeze";
-    //  this.bankValue = 300;
-
-    } else if(i == 3){
-      mtd.ability = "explosive";
-    //  this.bankValue = 700;
-
-    } else {
-      mtd.ability = "ray";
-    //  this.bankValue = 1000;
-    }// createDiv("");
+      var mtd = document.createElement("div"); // createDiv("");
 
       /*
       var h5 = document.createTextNode("Cost");
@@ -566,14 +536,12 @@ class Game {
     console.log("Bankvalue = " + this.bankValue);
     console.log("Cost = " + mtd.cost);
     if(this.bankValue >= mtd.cost){
-      var tower = new Tower( mtd.cost, mtd.cnvTurImg, mtd.cnvBulImg, mtd.ability);
+      var tower = new Tower( mtd.cost, mtd.cnvTurImg, mtd.cnvBulImg);
       if(tower)
         this.towers.push(tower); // add tower to the end of the array of towers
       else {
         println('failed to make tower');
       }
-    } else {
-      alert("Insufficient Funds!");
     }
   }
 
@@ -608,12 +576,10 @@ class Game {
   //+++++++++++++++++++++++++   tile menu callbacks
   tileRollOver() {
     this.style.backgroundColor = '#f7e22a';
-    towerGame.updateCostInfoElement(this.cost);
   }
 
   tileRollOut() {
     this.style.backgroundColor = '#DDD';
-    towerGame.updateCostInfoElement("");
   }
 
   tilePressed() {
@@ -659,15 +625,7 @@ class Game {
     }
     else if(!towerGame.placingTower && !cell.hasTower) {
         // toggle the occupied property of the clicked cell
-
-        if (!cell.occupied && towerGame.bankValue >= towerGame.wallCost){
-            towerGame.bankValue -= towerGame.wallCost;
-            cell.occupied = true;
-        } else {
-            towerGame.bankValue += towerGame.wallCost;
-            cell.occupied = false;
-        }
-
+        cell.occupied = !cell.occupied;
         towerGame.brushfire(towerGame.undo(cell));   // all new distances and parents
         }
   }

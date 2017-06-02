@@ -37,21 +37,13 @@ class Wave {
   }
     //parses JSON
     enemySelector(game,enemyJSON) {
-      for(var i = 0; i < 3; i++) { // try 3 times to find valid start cell
-        // will caculate row and column within the range specified by JSON file
-        let row = Math.floor(Math.floor(Math.random()*(game.rows*(enemyJSON.enemyPosition[1][1]-enemyJSON.enemyPosition[1][0])))+game.rows*enemyJSON.enemyPosition[1][0]);
-        let col = Math.floor(Math.floor(Math.random()*(game.cols*(enemyJSON.enemyPosition[0][1]-enemyJSON.enemyPosition[0][0])))+game.cols*enemyJSON.enemyPosition[0][0]);
-        var startCell = this.game.grid[col][row];
-        if(startCell && startCell.parent)   // must have a parent to have any path
-        break;
-      }
-      if(i < 3) { // if we found a valid cell to start the enemy
+       // if we found a valid cell to start the enemy
         //create an array of the arguments for the enemy class
-        var args=[null,game,startCell].concat(enemyJSON.additionalEnemyArguments)
+        var args=[null,game].concat(enemyJSON.additionalEnemyArguments)
         //apply the argument array to the specified enemy class
         var tempEnemy= enemyJSON.enemy.bind.apply(enemyJSON.enemy,args)
         return new tempEnemy
-      }
+
     }
 }
 //so yeah,theres stuff here
@@ -71,15 +63,29 @@ AllWaves=[
     "packets":[
       {
         "enemy":{//this specifies the information about the enemy
-          "enemy":Enemy1,
-          "enemyPosition":[// this specifies the range where a cell will randomly spawn
-            [// the two numbers are the min and max of positions
-              0,1// the number is scaled from 0 to 1 where 1 is the rightmost and 0 is the leftmost
-            ],
-            [
-              0,.5 // this number is scaled from 0 to 1 where 1 is the bottom and 0 is the top
-            ]
-          ],
+          "enemy":Enemy2,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":10,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy3,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":10,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy4,
           "additionalEnemyArguments":[//
             1
           ]
@@ -90,7 +96,7 @@ AllWaves=[
       },
       {
         "enemy":{
-          "enemy":Enemy,
+          "enemy":Enemy5,
           "enemyPosition":[
             [
               0,1

@@ -3,15 +3,16 @@ class Panel{
   constructor(game, number){
       this.game = game
       this.temp = 0
-      this.y = -290
+      this.y = -590
       this.panel = document.createElement("div")
       this.panel.id = panelJSON[number].id
       this.panel.style.width = 450+"px"
       this.panel.style.height = 290+"px"
       this.panel.style.backgroundImage = 'url("'+panelJSON[number].pic+'")'
       this.panel.style.position = "absolute"
-      this.panel.align = "center"
-      this.panel.style.top = this.y+"px"
+      this.panel.style.align = "center"
+      this.panel.style.top = -800+"px"
+      this.panel.style.left = 680+"px";
       this.panel.style.textAlign = "center"
       this.wrapper = document.getElementById('wrapperDiv').appendChild(this.panel)
       for(let i = 0; i < panelJSON[number].buttonJSON.length; i++){
@@ -20,15 +21,14 @@ class Panel{
   }
 
   render(){
-    this.temp = this.lerp(this.y,300,.05)
+    this.y = this.slideDown(this.y,550,.05)
     this.panel.style.top = this.y+"px"
-    if(Math.abs(this.temp) >1){
-      this.y = this.temp
-    }
   }
 
-  lerp( a,  b,  f){
-    return a + f * (b - a)
+  slideDown(start, end, incroment){
+    if((incroment*(end-start))>1)
+    return start + incroment * (end - start)
+    return start
   }
 
   createButton(JSON1, i){
@@ -37,8 +37,8 @@ class Panel{
     button.style.width=123+"px"
     button.style.height=30+"px"
     button.style.position="relative"
-    button.style.top=12+21*i+"%"
-    button.style.left=150+"px"
+    button.style.top = 5+21*i+"%"
+    button.style.left = 50+"px"
     button.image = document.createElement("img")
     button.image.id = JSON1.buttonJSON[i].picId
     button.image.src = JSON1.buttonJSON[i].pic
@@ -51,13 +51,13 @@ class Panel{
 var panelJSON= [{
   name: "Start Panel",
   id: "firstPanel",
-  pic: "pan.png",
+  pic: "resources/images/panels/panel.png",
   picId: "pan",
   buttonJSON: [
     {
       name: "Start Button",
       id: "start",
-      pic: "play.png",
+      pic: "resources/images/panels/start.png",
       picId: "play",
       funk: function(){
         towerGame.level= new Level2(towerGame)
@@ -66,7 +66,7 @@ var panelJSON= [{
     },{
       name: "Instruction Button",
       id: "instruction",
-      pic: "wframe.png",
+      pic: "resources/images/panels/other.png",
       picId: "wframe",
       funk: function(){
         towerGame.level.panelInstructions = new Panel(towerGame, 1)
@@ -75,7 +75,7 @@ var panelJSON= [{
     },{
       name: "Quit Button",
       id: "quitButton",
-      pic: "exit.png",
+      pic: "resources/images/panels/end.png",
       picId: "exit",
       funk: function(){
         towerGame.level= new Level3(towerGame)
@@ -85,7 +85,7 @@ var panelJSON= [{
 },{
   name: "Instruction Panel",
   id: "instructionPanel",
-  pic: "pan.png",
+  pic: "resources/images/panels/panel.png",
   picId: "pan",
   buttonJSON: [
     {
@@ -101,13 +101,13 @@ var panelJSON= [{
 },{
   name: "End Panel",
   id: "endPanel",
-  pic: "pan.png",
+  pic: "resources/images/panels/panel.png",
   picId: "pan",
   buttonJSON: [
     {
       name: "Replay Button",
       id: "replayButton",
-      pic: "wframe.png",
+      pic: "resources/images/panels/restart.png",
       picId: "wframe",
       funk: function(){
         towerGame.level= new Level1(towerGame)
@@ -116,7 +116,7 @@ var panelJSON= [{
     },{
       name: "Quit Button",
       id: "quitButton",
-      pic: "exit.png",
+      pic: "resources/images/panels/end.png",
       picId: "exit",
       funk: function(){
         document.getElementById("endPanel").parentNode.removeChild(document.getElementById("endPanel"))
