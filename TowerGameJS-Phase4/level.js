@@ -45,7 +45,7 @@ class Level2 extends Level{
     this.game.bullets = []
     this.game.cols = Math.floor(this.game.canvas.width / this.game.w);
     this.game.rows = Math.floor(this.game.canvas.height / this.game.w);
-
+    this.game.backgroundMusic = new Audio('Elevator-music.mp3')
     this.game.loadGrid();
     this.game.root = this.game.grid[this.game.cols - 1][this.game.rows -1];
     this.game.brushfire();
@@ -59,6 +59,7 @@ class Level2 extends Level{
     this.game.removeBullets();
     this.game.removeEnemies();
     this.game.controlWaves()
+    this.game.backgroundMusic.play();
     if (this.game.isRunning) {
       this.game.render();
     }
