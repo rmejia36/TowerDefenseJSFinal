@@ -2,10 +2,12 @@
 
 class Tower {
   // issue#1 use preloaded images
-  constructor( cost, tImg, bImg) {
+  constructor( cost, tImg, bImg, ability) {
     this.loc = vector2d(0, 0);
     this.placed = false;
     this.visible = false;
+    this.enX= 0;
+    this.enY =0;
     this.cost = cost;
     this.bulletImg = bImg;
     this.towImg = tImg;
@@ -14,7 +16,16 @@ class Tower {
     this.coolDown = 500;
     towerGame.bankValue = towerGame.bankValue- this.cost;
     this.enemies=towerGame.enemies
-    this.range=200
+    this.range=200;
+    if(ability == "freeze")
+    this.coolDown = 3000;
+  else if(ability == "normal" || ability == "explosive")
+    this.coolDown = 2000;
+  else if(ability == "fast")
+    this.coolDown = 200;
+  else
+    this.coolDown = 100;
+  this.ability = ability;
     this.target=null
     this.enemy=null
   }
@@ -53,12 +64,38 @@ class Tower {
     let millis = Date.now();
      if(this.placed &&
       dist < this.range &&
-      (millis-this.lastTime > this.coolDown )){
+      (millis-this.lastTime > this.coolDown ) && towerGame.enemies.length != 0 && this.target.x != towerGame.canvas.mouseX){
           // reset lastTime to current time
           this.lastTime = millis;
           let bulletLocation = vector2d(this.loc.x, this.loc.y);
-          let b = new Bullet(bulletLocation , this.bulletImg, this.towAngle);
-          towerGame.bullets.push(b);
+          //  console.log(this.ability);
+         let b = new Bullet(bulletLocation , this.bulletImg, this.towAngle, this.ability);
+       //  towerGame.bullets.push(b);
+         if(this.ability != "freeze" && this.ability != "ray"){
+           console.log("shoot");
+           towerGame.bullets.push(b);
+     }
+   }
+   if(this.ability == "ray" && towerGame.enemies.length != 0){
+     var a3 = this.loc.x - this.target.x;
+     var b3 = this.loc.y - this.target.y;
+     var k = Math.sqrt(a3*a3 + b3*b3);
+     if( k < 300 && towerGame.enemies.length != 0 && this.target.x != towerGame.canvas.mouseX){
+     var rys = new LockOn(this.loc, this.target);
+     rys.run();
+     //  console.log(this.findEnemyIndex());
+     if(this.findEnemyIndex() < towerGame.enemies.length)
+       towerGame.enemies[this.findEnemyIndex()].isLocked = true;//health -=  10;
+     } else {
+       towerGame.rays = [];
+     }
+   }
+ }
+ findEnemyIndex(){
+   for(let i=0;i<this.enemies.length;i++){
+     if(this.enemies[i].loc.dist(this.loc)<this.range){
+       return i;
+     }
 
     }
   }

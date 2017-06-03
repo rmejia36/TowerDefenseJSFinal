@@ -48,8 +48,12 @@ class Game {
     this.towers = [];
     this.enemies = [];
     this.bullets = [];
-
+    this.explosiveBullets = [];
     this.bankValue = 500;
+    this.rays = [];
+    this.checkOnce = true;
+    this.enemyNum = 20;
+    this.wallCost = 2;
 
     this.loadEnemyImages();
     this.score = 0;
@@ -333,7 +337,13 @@ class Game {
         }
       }else{
         return function() {
-          cell.occupied= !cell.occupied
+          if (cell.occupied){
+            cell.occupied = false;
+            towerGame.bankValue += towerGame.wallCost;
+          } else {
+            cell.occupied = true;
+            towerGame.bankValue -= towerGame.wallCost;
+          }
           alert("performing that action would create an invalid grid")
         }
       }
@@ -394,7 +404,7 @@ class Game {
   }
   updateInfoElements(time){
     let infoElements = document.getElementById('infoDiv').getElementsByClassName('infoTileDiv');
-    for(let i = 0; i < infoElements.length; i++){
+    for(let i = 0; i < infoElements.length-1; i++){
       let info = infoElements[i];
       // change the html content after condition--use indexOf
       if(info.innerHTML.indexOf('Bank') != -1){
@@ -415,6 +425,11 @@ class Game {
         info.innerHTML = 'Health <br/>' + this.health;
       }
     }
+  }
+  updateCostInfoElement(value) {
+  let infoElements = document.getElementById('infoDiv').getElementsByClassName('infoTileDiv');
+  let info = infoElements[infoElements.length-1];
+  info.innerHTML = 'Cost <br/>' + value;
   }
 
   updateGameTime(){
@@ -472,7 +487,26 @@ class Game {
     //  loop through the towers and DO NOT include wall element
     for(var i = 0; i < 5; i++){
       var mtd = document.createElement("div"); // createDiv("");
+      if(i == 0){
+      mtd.ability = "normal";
+//        this.bankValue = 200;
 
+    } else if(i == 1){
+      mtd.ability = "fast";
+    //  this.bankValue = 500;
+
+    } else if(i == 2){
+      mtd.ability = "freeze";
+    //  this.bankValue = 300;
+
+    } else if(i == 3){
+      mtd.ability = "explosive";
+    //  this.bankValue = 700;
+
+    } else {
+      mtd.ability = "ray";
+    //  this.bankValue = 1000;
+    }// createDiv("");
       /*
       var h5 = document.createTextNode("Cost");
       var cnvTurImgPath = "resources/images/tow" + (i+1) + "s.png";  // small tower image for canvas
@@ -536,7 +570,7 @@ class Game {
     console.log("Bankvalue = " + this.bankValue);
     console.log("Cost = " + mtd.cost);
     if(this.bankValue >= mtd.cost){
-      var tower = new Tower( mtd.cost, mtd.cnvTurImg, mtd.cnvBulImg);
+      var tower = new Tower( mtd.cost, mtd.cnvTurImg, mtd.cnvBulImg, mtd.ability);
       if(tower)
         this.towers.push(tower); // add tower to the end of the array of towers
       else {
@@ -576,10 +610,12 @@ class Game {
   //+++++++++++++++++++++++++   tile menu callbacks
   tileRollOver() {
     this.style.backgroundColor = '#f7e22a';
+    towerGame.updateCostInfoElement(this.cost);
   }
 
   tileRollOut() {
     this.style.backgroundColor = '#DDD';
+    towerGame.updateCostInfoElement("");
   }
 
   tilePressed() {
@@ -625,7 +661,13 @@ class Game {
     }
     else if(!towerGame.placingTower && !cell.hasTower) {
         // toggle the occupied property of the clicked cell
-        cell.occupied = !cell.occupied;
+        if (!cell.occupied && towerGame.bankValue >= towerGame.wallCost){
+            towerGame.bankValue -= towerGame.wallCost;
+            cell.occupied = true;
+        } else {
+            towerGame.bankValue += towerGame.wallCost;
+            cell.occupied = false;
+        }
         towerGame.brushfire(towerGame.undo(cell));   // all new distances and parents
         }
   }

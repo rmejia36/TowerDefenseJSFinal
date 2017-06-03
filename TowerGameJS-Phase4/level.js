@@ -102,7 +102,7 @@ class Level2 extends Level{
     // }
 
     //collision detection
-    for(var i = this.game.enemies.length-1; i >= 0; i--){
+    /*for(var i = this.game.enemies.length-1; i >= 0; i--){
       for(var j = this.game.bullets.length-1; j >= 0; j--){
         if(this.game.circlePointCollision(this.game.bullets[j].loc.x, this.game.bullets[j].loc.y, this.game.enemies[i].loc.x, this.game.enemies[i].loc.y, this.game.enemies[i].radius)){
           this.game.bullets.splice(j, 1);
@@ -116,7 +116,7 @@ class Level2 extends Level{
     }
     if( this.game.health <= 0){
       this.game.level=new Level3(this.game)
-    }
+    }*/
   }
 
 }
