@@ -20,7 +20,7 @@ class Tower {
     if(ability == "freeze")
     this.coolDown = 3000;
   else if(ability == "normal" || ability == "explosive")
-    this.coolDown = 2000;
+    this.coolDown = 600;
   else if(ability == "fast")
     this.coolDown = 200;
   else
@@ -29,20 +29,32 @@ class Tower {
     this.target=null
     this.enemy=null
   }
+
   run() {
     this.render();
     this.update();
   }
+
   render() {
     var ctx = towerGame.context;
     ctx.save();
       ctx.translate(this.loc.x, this.loc.y);
       ctx.rotate(this.towAngle + Math.PI/2);
+      if(!this.placed && this.loc.x !== 0) {
+        ctx.beginPath();
+        ctx.arc(0, 0, this.range, 0, 2*Math.PI, false);
+         ctx.fillStyle = 'rgba(192, 192, 192, 0.5)';
+         ctx.fill();
+         ctx.lineWidth = 5;
+         ctx.strokeStyle = '#003300';
+         ctx.stroke();
+      }
       if (this.visible) { //  not visible when first created
         ctx.drawImage(this.towImg, -this.towImg.width/2,-this.towImg.height/2);
         }
     ctx.restore();
   }
+
   update() {
     //  Rotate turret to follow mouse
     this.enemy=this.findEnemy()
@@ -68,43 +80,41 @@ class Tower {
           // reset lastTime to current time
           this.lastTime = millis;
           let bulletLocation = vector2d(this.loc.x, this.loc.y);
-          //  console.log(this.ability);
-         let b = new Bullet(bulletLocation , this.bulletImg, this.towAngle, this.ability);
-       //  towerGame.bullets.push(b);
-         if(this.ability != "freeze" && this.ability != "ray"){
-           console.log("shoot");
-           towerGame.bullets.push(b);
-     }
-   }
-   if(this.ability == "ray" && towerGame.enemies.length != 0){
-     var a3 = this.loc.x - this.target.x;
-     var b3 = this.loc.y - this.target.y;
-     var k = Math.sqrt(a3*a3 + b3*b3);
-     if( k < 300 && towerGame.enemies.length != 0 && this.target.x != towerGame.canvas.mouseX){
-     var rys = new LockOn(this.loc, this.target);
-     rys.run();
-     //  console.log(this.findEnemyIndex());
-     if(this.findEnemyIndex() < towerGame.enemies.length)
-       towerGame.enemies[this.findEnemyIndex()].isLocked = true;//health -=  10;
-     } else {
-       towerGame.rays = [];
-     }
-   }
- }
- findEnemyIndex(){
-   for(let i=0;i<this.enemies.length;i++){
-     if(this.enemies[i].loc.dist(this.loc)<this.range){
-       return i;
-     }
+          console.log(this.ability);
+          let b = new Bullet(bulletLocation , this.bulletImg, this.towAngle, this.ability);
+          towerGame.bullets.push(b);
+          if(this.ability != "freeze" && this.ability != "ray"){
+            console.log("shoot");
+            towerGame.bullets.push(b);
+      }
+    }
+    if(this.ability == "ray" && towerGame.enemies.length != 0){
+      var a3 = this.loc.x - this.target.x;
+      var b3 = this.loc.y - this.target.y;
+      var k = Math.sqrt(a3*a3 + b3*b3);
+      if( k < 300 && towerGame.enemies.length != 0 && this.target.x != towerGame.canvas.mouseX){
+      var rys = new LockOn(this.loc, this.target);
+      rys.run();
+        console.log(this.findEnemyIndex());
+      if(this.findEnemyIndex() < towerGame.enemies.length)
 
+        towerGame.enemies[this.findEnemyIndex()].isLocked = true;//health -=  10;
+      } else {
+        towerGame.rays = [];
+      }
+    }
+  }
+  findEnemyIndex(){
+    for(let i=0;i<this.enemies.length;i++){
+      if(this.enemies[i].loc.dist(this.loc)<this.range){
+        return i;
+      }
     }
   }
   findEnemy(){
     for(let i=0;i<this.enemies.length;i++){
-      if(this.enemies[i]){
-        if(this.enemies[i].loc.dist(this.loc)<this.range){
-          return this.enemies[i]
-        }
+      if(this.enemies[i].loc.dist(this.loc)<this.range){
+        return this.enemies[i]
       }
     }
   }
