@@ -565,7 +565,7 @@ class Game {
     console.log("Bankvalue = " + this.bankValue);
     console.log("Cost = " + mtd.cost);
     if(this.bankValue >= mtd.cost){
-      var tower = new Tower( mtd.cost, mtd.cnvTurImg, mtd.cnvBulImg, mtd.ability);
+      var tower = new Tower(mtd.cost, mtd.cnvTurImg, mtd.cnvBulImg, mtd.ability);
       if(tower)
         this.towers.push(tower); // add tower to the end of the array of towers
       else {

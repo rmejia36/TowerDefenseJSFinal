@@ -28,22 +28,33 @@ class Tower {
   this.ability = ability;
     this.target=null
     this.enemy=null
-
   }
+
   run() {
     this.render();
     this.update();
   }
+
   render() {
     var ctx = towerGame.context;
     ctx.save();
       ctx.translate(this.loc.x, this.loc.y);
       ctx.rotate(this.towAngle + Math.PI/2);
+      if(!this.placed && this.loc.x !== 0) {
+        ctx.beginPath();
+        ctx.arc(0, 0, this.range, 0, 2*Math.PI, false);
+         ctx.fillStyle = 'rgba(192, 192, 192, 0.5)';
+         ctx.fill();
+         ctx.lineWidth = 5;
+         ctx.strokeStyle = '#003300';
+         ctx.stroke();
+      }
       if (this.visible) { //  not visible when first created
         ctx.drawImage(this.towImg, -this.towImg.width/2,-this.towImg.height/2);
         }
     ctx.restore();
   }
+
   update() {
     //  Rotate turret to follow mouse
     this.enemy=this.findEnemy()
