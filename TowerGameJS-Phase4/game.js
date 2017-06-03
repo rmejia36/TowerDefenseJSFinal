@@ -571,12 +571,16 @@ class Game {
     console.log("Cost = " + mtd.cost);
     if(this.bankValue >= mtd.cost){
       var tower = new Tower( mtd.cost, mtd.cnvTurImg, mtd.cnvBulImg, mtd.ability);
-      if(tower)
+      if(tower) {
         this.towers.push(tower); // add tower to the end of the array of towers
+        return(true);
+        }
       else {
         println('failed to make tower');
       }
     }
+    else alert("Insufficient Funds!");
+    return(false);
   }
 
   placeTower(cell) {
@@ -626,8 +630,8 @@ class Game {
     //if user clicks tile and not placing tile change placing to true
     // can add Tower checks cost and other conditions
     if(towerGame.placingTower === true) return;
-    towerGame.createTower(this);
-    towerGame.placingTower = true;
+    if(towerGame.createTower(this))
+        towerGame.placingTower = true;
 
 
 
@@ -664,7 +668,10 @@ class Game {
         if (!cell.occupied && towerGame.bankValue >= towerGame.wallCost){
             towerGame.bankValue -= towerGame.wallCost;
             cell.occupied = true;
-        } else {
+        } else if(!cell.occupied) {
+            alert("Insufficient Funds!");
+            }
+        else {
             towerGame.bankValue += towerGame.wallCost;
             cell.occupied = false;
         }
