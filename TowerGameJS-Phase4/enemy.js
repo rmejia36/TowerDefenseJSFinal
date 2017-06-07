@@ -17,7 +17,7 @@ class Enemy {
     this.towerLoc =  vector2d(0, 0);
     this.velVec;
     this.increasedDamg = 18;
-    this.health = 200;
+    this.health = 2000;
     this.slowVel= this.initialVel - .8;
       // velocity factor
       this.damages = 0;
@@ -284,17 +284,20 @@ class Enemy3 extends Enemy {
   constructor(game) {
     super(game)
     this.img=Enemy.image3
+    this.health=5000
   }
 }
 class Enemy4 extends Enemy {
   constructor(game) {
     super(game)
     this.img=Enemy.image4
+    this.health=15000
   }
 }
 class Enemy5 extends Enemy {
   constructor(game) {
     super(game)
     this.img=Enemy.image5
+    this.health=100000
   }
 }
