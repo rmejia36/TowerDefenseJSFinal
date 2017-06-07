@@ -144,7 +144,7 @@ class Enemy {
 //  console.log(this.health);
 if(this.health <= 0){
   this.kill = true;
-  towerGame.bankValue += 10;
+  towerGame.bankValue += 5;
   //console.log("kills");
 }
 
