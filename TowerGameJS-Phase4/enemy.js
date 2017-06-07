@@ -11,6 +11,7 @@ class Enemy {
     this.isLocked = false;
     this.initialVel = 1.8;
     this.isTarget= false;
+    this.deathSound = new Audio('splat.mp3');
     this.lastTime = Date.now();
     this.coolDown = 1000;
     this.towerLoc =  vector2d(0, 0);
@@ -144,6 +145,8 @@ class Enemy {
 //  console.log(this.health);
 if(this.health <= 0){
   this.kill = true;
+  this.deathSound.play();
+  console.log("play");
   towerGame.bankValue += 10;
   //console.log("kills");
 }
