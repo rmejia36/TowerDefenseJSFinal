@@ -6,9 +6,25 @@ class Enemy {
     this.loc = this.currentCell.center.copy();
     this.randomPath = 0;   //boolean to randomize or not
     this.radius = 15.0;
+    this.r = 3.0;
+    this.vel = 3.0;
+    this.isLocked = false;
+    this.initialVel = 1.8;
+    this.isTarget= false;
+    this.deathSound = new Audio('splat.mp3');
+    this.lastTime = Date.now();
+    this.coolDown = 1000;
+    this.towerLoc =  vector2d(0, 0);
+    this.velVec;
+    this.increasedDamg = 18;
+    this.health = 200;
+    this.slowVel= this.initialVel - .8;
+      // velocity factor
+      this.damages = 0;
     this.vel = 3.0;       // velocity factor
     this.targetCell = this.nextTarget();
     this.target =  this.targetCell.center;
+    this.shape = "circle";
     var targetVec = this.target.copy().sub(this.loc);
     this.velVec = targetVec.copy().normalize().scale(this.vel);      // initial velocity vector
     this.kill = false;
@@ -65,6 +81,78 @@ class Enemy {
     // find a new target and rotate the velocity in the direaction
     // of the new target.
   update() {
+    let millis = Date.now();
+    for(let h = 0; h < towerGame.bullets.length; h++){
+          //  console.log(towerGame.bullets[h].ability);
+      if(this.checkCollide(this, towerGame.bullets[h])){
+        if(towerGame.bullets[h].ability == "normal"){
+          //this.health = this.health - 100;
+          this.health = this.health - 50;
+          //console.log(this.health)
+          towerGame.bullets.splice(h, 1);
+        } else if(towerGame.bullets[h].ability == "fast"){
+          this.health = this.health - 50;
+        //  console.log(this.health)
+          towerGame.bullets.splice(h, 1);
+        }else if(towerGame.bullets[h].ability == "explosive"){
+            console.log("idk");
+            this.health = this.health - 10;
+          //this.health = this.health - 10;
+          if(this.health <= 0){
+            this.kill = true;
+          }
+          this.locations = this.loc;
+
+          towerGame.explosiveBullets.push(new Explosives(towerGame.bullets[h].loc));
+          //towerGame.explosiveBullets.push(new Explosives(towerGame.bullets[h].loc));
+          towerGame.bullets.splice(h, 1);
+          //console.log("exp");
+        }
+
+
+    }
+  }
+
+  if(this.isLocked){
+    this.damages = 1+ this.increasedDamg;
+    this.health = this.health-this.increasedDamg;
+  }
+
+
+
+    for(let i = 0; i < towerGame.explosiveBullets.length; i++){
+      if(this.loc.dist(towerGame.explosiveBullets[i].loc) < 40){
+        this.health = this.health - 30;
+      }
+      if(towerGame.explosiveBullets[i].kills == true ){
+        towerGame.explosiveBullets.splice(i, 1);
+        console.log("die");
+      }
+    }
+
+
+
+  for(let t = 0; t < towerGame.towers.length; t++){
+
+    if(this.loc.dist(towerGame.towers[t].loc) <  100 && towerGame.towers[t].ability == "freeze"){
+      this.vel = this.initialVel - .8;
+      break;
+    } else {
+    //console.log("cancel freeze");
+    this.vel = this.initialVel;
+  }
+}
+//  console.log(this.health);
+if(this.health <= 0){
+  this.kill = true;
+
+  this.deathSound.play();
+  console.log("play");
+  towerGame.bankValue += 10;
+
+  //console.log("kills");
+}
+
     if(this.loc.dist(this.target) <= this.vel) {    // if we have reached the current target
         this.currentCell = this.targetCell;
         if(this.currentCell == this.game.root) {   // we have reached the end of the path
@@ -97,6 +185,81 @@ class Enemy {
     this.fun()
   }
   fun() {
+
+  }
+  checkCollide(shape1, shape2) {
+
+     if(shape1.shape === "circle") {
+       if(shape2.shape === "circle") {
+         //circle-circle
+         //console.log(this.dist(shape1.loc, shape2.loc) );
+         if(shape1.r + shape2.r >= shape1.loc.copy().dist(shape2.loc)) return true;
+         return false;
+       } else if(shape2.shape === "square") {
+         //circle-square
+         let topLeft = shape2.loc;
+         let topRight = new vector2d(shape2.loc.x + shape2.w, shape2.loc.y);
+         let bottomRight = new vector2d(shape2.loc.x + shape2.w, shape2.loc.y + shape2.w);
+         let bottomLeft = new vector2d(shape2.loc.x, shape2.loc.y +_shape2.w);
+         let dist1 = this.dist(topLeft, shape1.loc);
+         let dist2 = this.dist(topRight, shape1.loc);
+         let dist3 = this.dist(bottomRight, shape1.loc);
+         let dist4 = this.dist(bottomLeft, shape1.loc);
+         if(dist1 <= shape1.r || dist2 <= shape1.r || dist3 <= shape1.r || dist4 <= shape1.r) return true;
+         return false;
+        } else if(shape2.shape === "point") {
+          //circle-point
+          if(shape1.r >= this.dist(shape1.loc, shape2.loc)) return true;
+          return false;
+        } else {
+          throw "shape2 shape not acceptable.";
+        }
+
+      } else if(shape1.shape === "square") {
+        if(shape2.shape === "circle") {
+          //square-circle
+          let topLeft = shape1.loc;
+          let topRight = new vector2d(shape1.loc.x + shape1.w, shape1.loc.y);
+          let bottomRight = new vector2d(shape1.loc.x + shape1.w, shape1.loc.y + shape1.w);
+          let bottomLeft = new vector2d(shape1.loc.x, shape1.loc.y + shape1.w);
+          let dist1 = this.dist(topLeft, shape2.loc);
+          let dist2 = this.dist(topRight, shape2.loc);
+          let dist3 = this.dist(bottomRight, shape2.loc);
+          let dist4 = this.dist(bottomLeft, shape2.loc);
+          if(dist1 <= shape2.r || dist2 <= shape2.r || dist3 <= shape2.r || dist4 <= shape2.r) return true;
+          return false;
+        } else if(shape2.shape === "square") {
+          //square-square
+          if (shape1.loc.x < shape2.loc.x + shape2.w &&
+            shape1.loc.x + shape1.w > shape2.loc.x &&
+            shape1.loc.y < shape2.loc.y + shape2.w &&
+            shape1.w + shape1.loc.y > shape2.loc.y) {
+              return true;
+          }
+          return false;
+        } else if(shape2.shape === "point") {
+          //square-point
+        } else {
+          throw "shape2 shape not acceptable.";
+        }
+      } else if(shape1.shape === "point") {
+        if(shape2.shape === "circle") {
+          //point-circle
+          if(shape2.r >= vector2d.dist(shape2.loc, shape1.loc)) return true;
+          return false;
+        } else if(shape2.shape === "square") {
+          //point-square
+        } else if(shape2.shape === "point") {
+          //point-point
+          if(vector2d.dist(shape2.loc, shape1.loc) < 1) return true;
+          return false;
+        } else {
+        throw "shape2 shape not acceptable.";
+      }
+    } else {
+      throw "shape1 shape not acceptable.";
+    }
+
 
   }
 
