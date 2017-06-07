@@ -55,6 +55,8 @@ class Game {
     this.enemyNum = 20;
     this.wallCost = 2;
 
+    this.paused = false;
+
     this.loadEnemyImages();
     this.score = 0;
     this.wave = 0;
@@ -129,6 +131,9 @@ class Game {
     this.root = this.grid[this.cols - 1][this.rows -1];
     this.brushfire();
     this.loadWallImage();
+
+    var button = document.getElementById('pauseButton');
+  button.addEventListener('click', this.pause, false);
   }
   //load wall stuff
   loadWallImage(){
@@ -173,8 +178,9 @@ class Game {
 
   run() { // called from draw()
 
+    if (!this.paused){
     this.level.run()
-    // let gt = this.updateGameTime();
+  }     // let gt = this.updateGameTime();
     // this.updateInfoElements(gt);
     // this.removeBullets();
     // this.removeEnemies();
@@ -231,6 +237,15 @@ class Game {
     // }
 
   }
+
+
+  pause(){
+    var butt = document.getElementById('pauseButton');
+  towerGame.paused = !towerGame.paused;
+  if (towerGame.paused) butt.innerHTML = "Play";
+  if (!towerGame.paused) butt.innerHTML = "Pause";
+}
+
 
   render() { // draw game stuff
     this.context.clearRect(0,0,this.canvas.width, this.canvas.height);
@@ -428,7 +443,7 @@ class Game {
   }
   updateCostInfoElement(value) {
   let infoElements = document.getElementById('infoDiv').getElementsByClassName('infoTileDiv');
-  let info = infoElements[infoElements.length-1];
+  let info = infoElements[infoElements.length-2];
   info.innerHTML = 'Cost <br/>' + value;
   }
 

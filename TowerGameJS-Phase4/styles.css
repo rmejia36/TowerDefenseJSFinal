@@ -18,6 +18,11 @@ body{
   text-align:center;
 
 }
+
+#pauseButton:hover{
+  background-color: #6666ff;
+}
+
 .loader {
   margin: auto;
   margin-top: 25%;
@@ -48,6 +53,13 @@ body{
   float:left;
 }
 
+#pauseButton{
+  background-color: #999999;
+}
+
+#pauseButton:hover{
+  background-color:#6666ff;
+}
 
 .infoTileDiv{
   background-color: white;
@@ -100,7 +112,6 @@ body{
  }
 
  button {
-     background:none!important;
      color:inherit;
      border:none;
      padding:0!important;
