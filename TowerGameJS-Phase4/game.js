@@ -539,6 +539,7 @@ class Game {
 
 
       mtd.cost = 100*i +50;
+      mtd.setAttribute('title', 'Cost = '+mtd.cost);
       mtd.id = 'towImgDiv' + i;
       tiles.push(mtd);
       this.createTowerBitmaps(ssImage, mtd,i)
