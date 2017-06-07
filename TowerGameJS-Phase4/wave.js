@@ -252,8 +252,8 @@ AllWaves=[
             1
           ]
         },
-        "num":60,
-        "enemyIncrement":.3,
+        "num":600,
+        "enemyIncrement":.03,
         "packetIncrement":3
       },
       {
@@ -263,7 +263,7 @@ AllWaves=[
             1
           ]
         },
-        "num":10,
+        "num":100,
         "enemyIncrement":.001,
         "packetIncrement":1
       },
@@ -274,8 +274,8 @@ AllWaves=[
             1
           ]
         },
-        "num":1,
-        "enemyIncrement":1,
+        "num":100,
+        "enemyIncrement":.1,
         "packetIncrement":1
       }
     ],
@@ -291,8 +291,8 @@ AllWaves=[
             1
           ]
         },
-        "num":12,
-        "enemyIncrement":.5,
+        "num":120,
+        "enemyIncrement":.05,
         "packetIncrement":3
       },
       {
@@ -302,8 +302,8 @@ AllWaves=[
             1
           ]
         },
-        "num":6,
-        "enemyIncrement":.25,
+        "num":60,
+        "enemyIncrement":.025,
         "packetIncrement":1
       },
       {
@@ -313,8 +313,8 @@ AllWaves=[
             1
           ]
         },
-        "num":7,
-        "enemyIncrement":2,
+        "num":70,
+        "enemyIncrement":.2,
         "packetIncrement":1
       }
     ],
@@ -330,8 +330,8 @@ AllWaves=[
             1
           ]
         },
-        "num":666,
-        "enemyIncrement":.06,
+        "num":6660,
+        "enemyIncrement":.006,
         "packetIncrement":1
       },
       {
@@ -341,8 +341,8 @@ AllWaves=[
             1
           ]
         },
-        "num":66,
-        "enemyIncrement":.6,
+        "num":660,
+        "enemyIncrement":.06,
         "packetIncrement":2
       },
       {
@@ -352,8 +352,8 @@ AllWaves=[
             1
           ]
         },
-        "num":6,
-        "enemyIncrement":1,
+        "num":60,
+        "enemyIncrement":.6,
         "packetIncrement":3
       },
       {
@@ -363,8 +363,8 @@ AllWaves=[
             1
           ]
         },
-        "num":66,
-        "enemyIncrement":.6,
+        "num":660,
+        "enemyIncrement":.06,
         "packetIncrement":2
       },
       {
@@ -374,8 +374,8 @@ AllWaves=[
             1
           ]
         },
-        "num":666,
-        "enemyIncrement":.06,
+        "num":6660,
+        "enemyIncrement":.006,
         "packetIncrement":1
       },
       {
@@ -385,8 +385,8 @@ AllWaves=[
             1
           ]
         },
-        "num":6666,
-        "enemyIncrement":.06,
+        "num":66660,
+        "enemyIncrement":.006,
         "packetIncrement":1
       }
     ],
@@ -419,8 +419,8 @@ AllWaves=[
             1
           ]
         },
-        "num":5,
-        "enemyIncrement":.7,
+        "num":500,
+        "enemyIncrement":.07,
         "packetIncrement":1
       },
       {
@@ -430,8 +430,8 @@ AllWaves=[
             1
           ]
         },
-        "num":5,
-        "enemyIncrement":.7,
+        "num":500,
+        "enemyIncrement":.07,
         "packetIncrement":1
       },
       {
@@ -441,8 +441,8 @@ AllWaves=[
             1
           ]
         },
-        "num":10,
-        "enemyIncrement":.5,
+        "num":1000,
+        "enemyIncrement":.005,
         "packetIncrement":1
       },
       {
@@ -452,8 +452,8 @@ AllWaves=[
             1
           ]
         },
-        "num":10,
-        "enemyIncrement":.5,
+        "num":1000,
+        "enemyIncrement":.005,
         "packetIncrement":1
       },
       {
@@ -463,8 +463,8 @@ AllWaves=[
             1
           ]
         },
-        "num":20,
-        "enemyIncrement":.3,
+        "num":2000,
+        "enemyIncrement":.003,
         "packetIncrement":1
       }
     ],
@@ -480,8 +480,8 @@ AllWaves=[
             1
           ]
         },
-        "num":10,
-        "enemyIncrement":1,
+        "num":100000,
+        "enemyIncrement":.001,
         "packetIncrement":0
       }
     ],
@@ -497,8 +497,8 @@ AllWaves=[
             1
           ]
         },
-        "num":100,
-        "enemyIncrement":.1,
+        "num":1000000,
+        "enemyIncrement":.0001,
         "packetIncrement":0
       }
     ],
@@ -523,7 +523,7 @@ AllWaves=[
           ]
         },
         "num":Infinity,
-        "enemyIncrement":.01,
+        "enemyIncrement":.000001,
         "packetIncrement":1
       },
       {

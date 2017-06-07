@@ -87,16 +87,16 @@ class Enemy {
       if(this.checkCollide(this, towerGame.bullets[h])){
         if(towerGame.bullets[h].ability == "normal"){
           //this.health = this.health - 100;
-          this.health = this.health - 50;
+          this.health = this.health - 1;
           //console.log(this.health)
           towerGame.bullets.splice(h, 1);
         } else if(towerGame.bullets[h].ability == "fast"){
-          this.health = this.health - 50;
+          this.health = this.health - 1;
         //  console.log(this.health)
           towerGame.bullets.splice(h, 1);
         }else if(towerGame.bullets[h].ability == "explosive"){
             console.log("idk");
-            this.health = this.health - 10;
+            this.health = this.health - .1;
           //this.health = this.health - 10;
           if(this.health <= 0){
             this.kill = true;
@@ -298,6 +298,6 @@ class Enemy5 extends Enemy {
   constructor(game) {
     super(game)
     this.img=Enemy.image5
-    this.health=100000
+    this.health=1000000000000000000
   }
 }
