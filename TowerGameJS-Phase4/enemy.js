@@ -87,11 +87,11 @@ class Enemy {
       if(this.checkCollide(this, towerGame.bullets[h])){
         if(towerGame.bullets[h].ability == "normal"){
           //this.health = this.health - 100;
-          this.health = this.health - 200;
+          this.health = this.health - 50;
           //console.log(this.health)
           towerGame.bullets.splice(h, 1);
         } else if(towerGame.bullets[h].ability == "fast"){
-          this.health = this.health - 100;
+          this.health = this.health - 50;
         //  console.log(this.health)
           towerGame.bullets.splice(h, 1);
         }else if(towerGame.bullets[h].ability == "explosive"){
