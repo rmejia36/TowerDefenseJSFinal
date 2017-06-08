@@ -1,13 +1,14 @@
 
 class Wave {
+  
   constructor(game,waveJson) {
-    this.game=game
-    this.waveJson=waveJson
-    console.log(this.waveJson)
-    this.enemyId=[0,0]
-    this.referenceTime=this.game.gameTime+this.waveJson.waveIncrement
-    this.spawnOver=false
+    this.game=game;
+    this.waveJson=waveJson;
+    this.enemyId=[0,0];
+    this.referenceTime=this.game.gameTime+this.waveJson.waveIncrement;
+    this.spawnOver=false;
   }
+
   run() {
 
       while(this.game.gameTime>this.referenceTime && !this.spawnOver){
@@ -79,7 +80,7 @@ AllWaves=[
             1
           ]
         },
-        "num":5,
+        "num":15,
         "enemyIncrement":1,
         "packetIncrement":1
       },
@@ -96,7 +97,7 @@ AllWaves=[
       }
     ],
     "name":"wave1",
-    "waveIncrement":6
+    "waveIncrement":20
   },
   {
     "packets":[
@@ -140,6 +141,162 @@ AllWaves=[
       }
     ],
     "name":"wave2",
+    "waveIncrement":6
+  },
+  {
+    "packets":[
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy1,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":10,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy2,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":5,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy3,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":1,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      }
+    ],
+    "name":"wave3",
+    "waveIncrement":6
+  },
+  {
+    "packets":[
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy1,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":10,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy2,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":5,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy3,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":1,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      }
+    ],
+    "name":"wave4",
+    "waveIncrement":6
+  },
+  {
+    "packets":[
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy1,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":10,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy2,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":5,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy3,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":1,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      }
+    ],
+    "name":"wave5",
+    "waveIncrement":6
+  },
+  {
+    "packets":[
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy1,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":10,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy2,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":5,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy3,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":1,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      }
+    ],
+    "name":"wave6",
     "waveIncrement":6
   },
   {

@@ -4,7 +4,7 @@
 window.addEventListener('load', loadImages, false);
 
 var towerGame;   // the global game object
-const FRAME_RATE=30;
+var FRAME_RATE=30;
 var cellId = 0;
 
 var bsImage;
@@ -14,9 +14,9 @@ var wrap;
 
  function loadImages(){
    bsImage = new Image();
-  bsImage.src = "resources/images/buttons.png";
+   bsImage.src = "resources/images/spritesheets/buttons.png";
    ssImage = new Image();
-   ssImage.src = "resources/images/spritesheet.png";
+   ssImage.src = "resources/images/spritesheets/sprites.png";
    window.setTimeout(setup, 1500);
  }
 function setup() {
@@ -69,7 +69,6 @@ class Game {
     this.canvas.canDiv=document.getElementById('canDiv')
     this.canvas.canDiv.appendChild(this.canvas);
 
-
     this.context = this.canvas.getContext("2d");
     if(!this.context)
         throw "No valid context found!";
@@ -81,11 +80,6 @@ class Game {
     this.canvas.addEventListener('mousemove',this.handleCNVMouseMoved,false);
     this.canvas.addEventListener('mouseover',this.handleCNVMouseOver, false);
     this.canvas.addEventListener('click', this.handleCNVMouseClicked, false);
-
-    window.addEventListener('keypress', function(evt) {
-        if(evt.key == "E" || evt.key == "e")
-            towerGame.sendEnemies();
-        }, false);
     this.currentWaveNum=0
     this.wave=new Wave(this,AllWaves[this.currentWaveNum])
 
@@ -133,7 +127,18 @@ class Game {
     this.loadWallImage();
 
     var button = document.getElementById('pauseButton');
-  button.addEventListener('click', this.pause, false);
+    button.addEventListener('click', this.pause, false);
+
+    var fastForwardButton = document.getElementById('fastForward');
+    fastForwardButton.addEventListener('click', function(){
+      if (FRAME_RATE == 30){
+        FRAME_RATE = 60;
+        fastForwardButton.innerHTML = "Slow Down";
+      } else {
+        fastForwardButton.innerHTML = "Fast Forward";
+        FRAME_RATE = 30;
+      }
+    },false);
   }
   //load wall stuff
   loadWallImage(){
@@ -141,7 +146,6 @@ class Game {
    var propName =  "B60000";
    var f = buttonsJSON.frames[propName].frame;
    createImageBitmap(bsImage, f.x, f.y, f.w, f.h).then(function(wallImage){
-     console.log(wallImage);
      Cell.wallImage = wallImage;
      //console.log(f);
    },
@@ -423,27 +427,47 @@ class Game {
       let info = infoElements[i];
       // change the html content after condition--use indexOf
       if(info.innerHTML.indexOf('Bank') != -1){
-        info.innerHTML = 'Bank <br/>' + this.bankValue;
+        info.innerHTML = 'Bank <br/>';
+        var value = document.createElement('p');
+        value.style.fontSize = '10pt';
+        value.innerHTML = this.bankValue;
+        info.appendChild(value)
         if(this.bankValue < 0){
           this.bankValue == 0;
         }
       }else if(info.innerHTML.indexOf('Time') != -1){
-        info.innerHTML = 'Time <br/>' + time;
+        info.innerHTML = 'Time <br/>';
+        var value = document.createElement('p');
+        value.style.fontSize = '10pt';
+        value.innerHTML = time;
+        info.appendChild(value);
       }
       if(info.innerHTML.indexOf('Score') != -1){
-        info.innerHTML = 'Score <br/>' + this.score;
+        info.innerHTML = 'Score <br/>';
+        var value = document.createElement('p');
+        value.style.fontSize = '10pt';
+        value.innerHTML = this.score;
+        info.appendChild(value);
       }
       if(info.innerHTML.indexOf('Wave') != -1){
-        info.innerHTML = 'Wave <br/>' + this.wave.waveJson.name;
+        info.innerHTML = 'Wave <br/>';
+        var value = document.createElement('p');
+        value.style.fontSize = '10pt';
+        value.innerHTML = this.wave.waveJson.name;
+        info.appendChild(value);
       }
       if(info.innerHTML.indexOf('Health') != -1){
-        info.innerHTML = 'Health <br/>' + this.health;
+        info.innerHTML = 'Health <br/>';
+        var value = document.createElement('p');
+        value.style.fontSize = '12pt';
+        value.innerHTML = this.health;
+        info.appendChild(value);
       }
     }
   }
   updateCostInfoElement(value) {
   let infoElements = document.getElementById('infoDiv').getElementsByClassName('infoTileDiv');
-  let info = infoElements[infoElements.length-2];
+  let info = infoElements[infoElements.length-3];
   info.innerHTML = 'Cost <br/>' + value;
   }
 
@@ -545,7 +569,7 @@ class Game {
       innerDiv.style.height = "100px";
        // Not using imageBitmaps for the buttons
        // As they are not on the canvas
-      innerDiv.style.backgroundImage = "url(resources/images/buttons.png)";
+      innerDiv.style.backgroundImage = "url(resources/images/spritesheets/buttons.png)";
       innerDiv.style.backgroundPosition = `${-button.x}px ${-button.y}px`;
       innerDiv.style.margin = "5px";
       mtd.appendChild(innerDiv);

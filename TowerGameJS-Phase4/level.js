@@ -16,7 +16,7 @@ class Level {
 class Level1 extends Level {
   constructor(game){
     super(game,1)
-    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg.png')"
+    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg/start.png')"
     this.panelStart = new Panel(this, 0)
     this.panelInstructions = 0
     this.panelQuit = 0
@@ -34,7 +34,7 @@ class Level1 extends Level {
 class Level2 extends Level{
   constructor(game) {
     super(game,2)
-    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg2.png')"
+    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg/play.png')"
     this.game.health=100
     this.game.score=0
     this.game.bankValue = 500;
@@ -45,7 +45,7 @@ class Level2 extends Level{
     this.game.bullets = []
     this.game.cols = Math.floor(this.game.canvas.width / this.game.w);
     this.game.rows = Math.floor(this.game.canvas.height / this.game.w);
-    this.game.backgroundMusic = new Audio('Elevator-music.mp3')
+    this.game.backgroundMusic = new Audio('resources/sounds/Elevator-music.mp3')
     this.game.loadGrid();
     this.game.root = this.game.grid[this.game.cols - 1][this.game.rows -1];
     this.game.brushfire();
@@ -80,12 +80,19 @@ class Level2 extends Level{
     for (let i = 0; i < this.game.bullets.length; i++) {
       this.game.bullets[i].run();
     }
+    for (let i = 0; i < this.game.explosiveBullets.length; i++) {
+      this.game.explosiveBullets[i].run();
+    }
+
+    for (let i = 0; i < this.game.bullets.length; i++) {
+  //    this.game.lockon[i].run();
+    }
+
 
     // some help text in the bottom left of the canvas
     this.game.context.save();
     this.game.context.fillStyle = "white";
     this.game.context.font = "14px sans-serif";
-    this.game.context.fillText("Press the E key to send enemies", 20, this.game.canvas.height-20);
     this.game.context.restore();
 
     //more panelthings
@@ -105,11 +112,11 @@ class Level2 extends Level{
     for(var i = this.game.enemies.length-1; i >= 0; i--){
       for(var j = this.game.bullets.length-1; j >= 0; j--){
         if(this.game.circlePointCollision(this.game.bullets[j].loc.x, this.game.bullets[j].loc.y, this.game.enemies[i].loc.x, this.game.enemies[i].loc.y, this.game.enemies[i].radius)){
-          this.game.bullets.splice(j, 1);
-          this.game.enemies[i].kill = true;
-          this.game.score = this.game.score + 1;
+          //this.game.bullets.splice(j, 1);
+        //  this.game.enemies[i].kill = true;
+        //  this.game.score = this.game.score + 1;
           if(this.game.score % 20 === 0){
-            this.game.bankValue = this.game.bankValue + 10;
+            //this.game.bankValue = this.game.bankValue + 10;
           }
         }
       }
@@ -124,7 +131,7 @@ class Level3 extends Level{
   constructor(game) {
     super(game)
     this.game.enemies=[]
-    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg3.png')"
+    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg/end.png')"
     this.panelQuit = new Panel(this, 2)
     this.panelCredits = 0
     this.panelStart = 0
