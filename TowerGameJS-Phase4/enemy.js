@@ -30,7 +30,6 @@ class Enemy {
     this.kill = false;
     this.angle=this.velVec.angle()
 
-
      this.img = Enemy.image3;// image for enemy
 
 
