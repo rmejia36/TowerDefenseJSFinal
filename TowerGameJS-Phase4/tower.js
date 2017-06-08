@@ -24,7 +24,7 @@ class Tower {
   else if(ability == "normal" || ability == "explosive")
     this.coolDown = 700;
   else if(ability == "fast")
-    this.coolDown = 200;
+    this.coolDown = 300;
   else
     this.coolDown = 100;
   this.ability = ability;
