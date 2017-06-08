@@ -4,7 +4,7 @@
 window.addEventListener('load', loadImages, false);
 
 var towerGame;   // the global game object
-const FRAME_RATE=30;
+var FRAME_RATE=30;
 var cellId = 0;
 
 var bsImage;
@@ -69,7 +69,6 @@ class Game {
     this.canvas.canDiv=document.getElementById('canDiv')
     this.canvas.canDiv.appendChild(this.canvas);
 
-
     this.context = this.canvas.getContext("2d");
     if(!this.context)
         throw "No valid context found!";
@@ -133,7 +132,18 @@ class Game {
     this.loadWallImage();
 
     var button = document.getElementById('pauseButton');
-  button.addEventListener('click', this.pause, false);
+    button.addEventListener('click', this.pause, false);
+
+    var fastForwardButton = document.getElementById('fastForward');
+    fastForwardButton.addEventListener('click', function(){
+      if (FRAME_RATE == 30){
+        FRAME_RATE = 100;
+        fastForwardButton.innerHTML = "Slow Down";
+      } else {
+        fastForwardButton.innerHTML = "Fast Forward";
+        FRAME_RATE = 30;
+      }
+    },false);
   }
   //load wall stuff
   loadWallImage(){
@@ -443,7 +453,7 @@ class Game {
   }
   updateCostInfoElement(value) {
   let infoElements = document.getElementById('infoDiv').getElementsByClassName('infoTileDiv');
-  let info = infoElements[infoElements.length-2];
+  let info = infoElements[infoElements.length-3];
   info.innerHTML = 'Cost <br/>' + value;
   }
 
