@@ -145,6 +145,162 @@ AllWaves=[
   {
     "packets":[
       {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy1,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":10,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy2,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":5,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy3,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":1,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      }
+    ],
+    "name":"wave3",
+    "waveIncrement":6
+  },
+  {
+    "packets":[
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy1,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":10,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy2,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":5,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy3,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":1,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      }
+    ],
+    "name":"wave4",
+    "waveIncrement":6
+  },
+  {
+    "packets":[
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy1,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":10,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy2,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":5,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy3,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":1,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      }
+    ],
+    "name":"wave5",
+    "waveIncrement":6
+  },
+  {
+    "packets":[
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy1,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":10,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy2,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":5,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      },
+      {
+        "enemy":{//this specifies the information about the enemy
+          "enemy":Enemy3,
+          "additionalEnemyArguments":[//
+            1
+          ]
+        },
+        "num":1,
+        "enemyIncrement":1,
+        "packetIncrement":1
+      }
+    ],
+    "name":"wave6",
+    "waveIncrement":6
+  },
+  {
+    "packets":[
+      {
         "enemy":{
           "enemy":Enemy1,
           "enemyPosition":[

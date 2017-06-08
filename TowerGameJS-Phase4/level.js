@@ -93,7 +93,6 @@ class Level2 extends Level{
     this.game.context.save();
     this.game.context.fillStyle = "white";
     this.game.context.font = "14px sans-serif";
-    this.game.context.fillText("Press the E key to send enemies", 20, this.game.canvas.height-20);
     this.game.context.restore();
 
     //more panelthings
