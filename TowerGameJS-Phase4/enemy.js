@@ -91,7 +91,7 @@ class Enemy {
           //console.log(this.health)
           towerGame.bullets.splice(h, 1);
         } else if(towerGame.bullets[h].ability == "fast"){
-          this.health = this.health - 250;
+          this.health = this.health - 350;
         //  console.log(this.health)
           towerGame.bullets.splice(h, 1);
         }else if(towerGame.bullets[h].ability == "freeze"){
