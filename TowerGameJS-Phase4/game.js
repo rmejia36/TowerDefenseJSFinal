@@ -676,9 +676,11 @@ class Game {
     var row = Math.floor(event.offsetY/towerGame.w);
     var col = Math.floor(event.offsetX/towerGame.w);
     var cell = towerGame.grid[col][row];
+
     if(towerGame.placingTower && towerGame.canAddTower(cell)){
       towerGame.placeTower(cell);
     }
+
     else if(!towerGame.placingTower && !cell.hasTower) {
         // toggle the occupied property of the clicked cell
         if (!cell.occupied && towerGame.bankValue >= towerGame.wallCost){
@@ -770,3 +772,30 @@ class Game {
 
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Other
 } // end Game class +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+window.onkeydown = function(e) {
+  var code = e.keyCode ? e.keyCode : e.which;
+
+  if (code == 85) { // u key
+    if (towerGame.bankValue >= 800){
+      var upgrade = prompt("Type rate to increase fire rate (costs 1000)\nType range to increase range (Costs 800)").toLowerCase();
+
+      if ((upgrade == "range" && towerGame.bankValue >= 800) || (upgrade == "rate" && towerGame.bankValue >= 1000)){
+        for (var i = 0; i < towerGame.towers.length; i++){
+          var tower = towerGame.towers[i];
+          if (upgrade === "rate"){
+            tower.coolDown -= 200;
+            towerGame.bankValue -= 1000;
+          } else if (upgrade === "range"){
+            tower.range += 200;
+            towerGame.bankValue -= 800;
+          } else {
+            alert("Other options are invalid!");
+          }
+        }
+      }
+    } else {
+      alert("Insufficient Funds!");
+    }
+  }
+}
