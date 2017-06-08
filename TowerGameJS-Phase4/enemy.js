@@ -16,7 +16,7 @@ class Enemy {
     this.coolDown = 1000;
     this.towerLoc =  vector2d(0, 0);
     this.velVec;
-    this.increasedDamg = 75;
+    this.increasedDamg = 20;
     this.health = 1000;
     this.slowVel= this.initialVel - .8;
       // velocity factor
