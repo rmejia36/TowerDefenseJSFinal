@@ -14,9 +14,9 @@ var wrap;
 
  function loadImages(){
    bsImage = new Image();
-  bsImage.src = "resources/images/buttons.png";
+   bsImage.src = "resources/images/spritesheets/buttons.png";
    ssImage = new Image();
-   ssImage.src = "resources/images/spritesheet.png";
+   ssImage.src = "resources/images/spritesheets/sprites.png";
    window.setTimeout(setup, 1500);
  }
 function setup() {
@@ -146,7 +146,6 @@ class Game {
    var propName =  "B60000";
    var f = buttonsJSON.frames[propName].frame;
    createImageBitmap(bsImage, f.x, f.y, f.w, f.h).then(function(wallImage){
-     console.log(wallImage);
      Cell.wallImage = wallImage;
      //console.log(f);
    },
@@ -570,7 +569,7 @@ class Game {
       innerDiv.style.height = "100px";
        // Not using imageBitmaps for the buttons
        // As they are not on the canvas
-      innerDiv.style.backgroundImage = "url(resources/images/buttons.png)";
+      innerDiv.style.backgroundImage = "url(resources/images/spritesheets/buttons.png)";
       innerDiv.style.backgroundPosition = `${-button.x}px ${-button.y}px`;
       innerDiv.style.margin = "5px";
       mtd.appendChild(innerDiv);

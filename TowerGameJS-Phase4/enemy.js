@@ -11,7 +11,7 @@ class Enemy {
     this.isLocked = false;
     this.initialVel = 1.8;
     this.isTarget= false;
-    this.deathSound = new Audio('splat.mp3');
+    this.deathSound = new Audio('resources/sounds/splat.mp3');
     this.lastTime = Date.now();
     this.coolDown = 1000;
     this.towerLoc =  vector2d(0, 0);

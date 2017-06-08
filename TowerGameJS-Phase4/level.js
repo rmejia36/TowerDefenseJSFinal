@@ -16,7 +16,7 @@ class Level {
 class Level1 extends Level {
   constructor(game){
     super(game,1)
-    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg.png')"
+    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg/start.png')"
     this.panelStart = new Panel(this, 0)
     this.panelInstructions = 0
     this.panelQuit = 0
@@ -34,7 +34,7 @@ class Level1 extends Level {
 class Level2 extends Level{
   constructor(game) {
     super(game,2)
-    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg2.png')"
+    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg/play.png')"
     this.game.health=100
     this.game.score=0
     this.game.bankValue = 500;
@@ -45,7 +45,7 @@ class Level2 extends Level{
     this.game.bullets = []
     this.game.cols = Math.floor(this.game.canvas.width / this.game.w);
     this.game.rows = Math.floor(this.game.canvas.height / this.game.w);
-    this.game.backgroundMusic = new Audio('Elevator-music.mp3')
+    this.game.backgroundMusic = new Audio('resources/sounds/Elevator-music.mp3')
     this.game.loadGrid();
     this.game.root = this.game.grid[this.game.cols - 1][this.game.rows -1];
     this.game.brushfire();
@@ -131,7 +131,7 @@ class Level3 extends Level{
   constructor(game) {
     super(game)
     this.game.enemies=[]
-    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg3.png')"
+    this.game.canvas.canDiv.style.backgroundImage="url('resources/images/bg/end.png')"
     this.panelQuit = new Panel(this, 2)
     this.panelCredits = 0
     this.panelStart = 0

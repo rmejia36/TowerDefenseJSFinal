@@ -125,7 +125,7 @@ var panelJSON= [{
     },{
       name: "Credits Button",
       id: "creditsButton",
-      pic: "wframe.png",
+      pic: "resources/images/panels/credits.png",
       picId: "wframe",
       funk: function(){
         towerGame.level.panelCredits = new Panel(towerGame, 3)
