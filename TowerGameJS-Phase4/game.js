@@ -81,11 +81,6 @@ class Game {
     this.canvas.addEventListener('mousemove',this.handleCNVMouseMoved,false);
     this.canvas.addEventListener('mouseover',this.handleCNVMouseOver, false);
     this.canvas.addEventListener('click', this.handleCNVMouseClicked, false);
-
-    window.addEventListener('keypress', function(evt) {
-        if(evt.key == "E" || evt.key == "e")
-            towerGame.sendEnemies();
-        }, false);
     this.currentWaveNum=0
     this.wave=new Wave(this,AllWaves[this.currentWaveNum])
 
@@ -423,21 +418,41 @@ class Game {
       let info = infoElements[i];
       // change the html content after condition--use indexOf
       if(info.innerHTML.indexOf('Bank') != -1){
-        info.innerHTML = 'Bank <br/>' + this.bankValue;
+        info.innerHTML = 'Bank <br/>';
+        var value = document.createElement('p');
+        value.style.fontSize = '10pt';
+        value.innerHTML = this.bankValue;
+        info.appendChild(value)
         if(this.bankValue < 0){
           this.bankValue == 0;
         }
       }else if(info.innerHTML.indexOf('Time') != -1){
-        info.innerHTML = 'Time <br/>' + time;
+        info.innerHTML = 'Time <br/>';
+        var value = document.createElement('p');
+        value.style.fontSize = '10pt';
+        value.innerHTML = time;
+        info.appendChild(value);
       }
       if(info.innerHTML.indexOf('Score') != -1){
-        info.innerHTML = 'Score <br/>' + this.score;
+        info.innerHTML = 'Score <br/>';
+        var value = document.createElement('p');
+        value.style.fontSize = '10pt';
+        value.innerHTML = this.score;
+        info.appendChild(value);
       }
       if(info.innerHTML.indexOf('Wave') != -1){
-        info.innerHTML = 'Wave <br/>' + this.wave.waveJson.name;
+        info.innerHTML = 'Wave <br/>';
+        var value = document.createElement('p');
+        value.style.fontSize = '10pt';
+        value.innerHTML = this.wave.waveJson.name;
+        info.appendChild(value);
       }
       if(info.innerHTML.indexOf('Health') != -1){
-        info.innerHTML = 'Health <br/>' + this.health;
+        info.innerHTML = 'Health <br/>';
+        var value = document.createElement('p');
+        value.style.fontSize = '12pt';
+        value.innerHTML = this.health;
+        info.appendChild(value);
       }
     }
   }
