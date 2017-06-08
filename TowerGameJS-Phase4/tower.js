@@ -80,11 +80,9 @@ class Tower {
           // reset lastTime to current time
           this.lastTime = millis;
           let bulletLocation = vector2d(this.loc.x, this.loc.y);
-          console.log(this.ability);
           let b = new Bullet(bulletLocation , this.bulletImg, this.towAngle, this.ability);
           towerGame.bullets.push(b);
           if(this.ability != "freeze" && this.ability != "ray"){
-            console.log("shoot");
             towerGame.bullets.push(b);
       }
     }
@@ -95,7 +93,6 @@ class Tower {
       if( k < 300 && towerGame.enemies.length != 0 && this.target.x != towerGame.canvas.mouseX){
       var rys = new LockOn(this.loc, this.target);
       rys.run();
-        console.log(this.findEnemyIndex());
       if(this.findEnemyIndex() < towerGame.enemies.length)
 
         towerGame.enemies[this.findEnemyIndex()].isLocked = true;//health -=  10;
