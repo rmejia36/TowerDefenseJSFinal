@@ -17,10 +17,12 @@ class Tower {
     towerGame.bankValue = towerGame.bankValue- this.cost;
     this.enemies=towerGame.enemies
     this.range=200;
-    if(ability == "freeze")
+    if(ability == "freeze"){
     this.coolDown = 3000;
+    this.range = 500;
+  }
   else if(ability == "normal" || ability == "explosive")
-    this.coolDown = 600;
+    this.coolDown = 700;
   else if(ability == "fast")
     this.coolDown = 200;
   else
@@ -80,13 +82,17 @@ class Tower {
           // reset lastTime to current time
           this.lastTime = millis;
           let bulletLocation = vector2d(this.loc.x, this.loc.y);
-          console.log(this.ability);
+          //console.log(this.ability);
           let b = new Bullet(bulletLocation , this.bulletImg, this.towAngle, this.ability);
-          towerGame.bullets.push(b);
-          if(this.ability != "freeze" && this.ability != "ray"){
-            console.log("shoot");
+        //  towerGame.bullets.push(b);
+          if( this.ability != "ray" && this.ability!= "freeze"){
+            //console.log("shoot");
             towerGame.bullets.push(b);
       }
+        if(this.ability == "freeze"){
+          let sb = new Bullet(bulletLocation , this.bulletImg, this.towAngle, this.ability)
+          towerGame.bullets.push(sb);
+        }
     }
     if(this.ability == "ray" && towerGame.enemies.length != 0){
       var a3 = this.loc.x - this.target.x;

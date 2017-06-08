@@ -80,6 +80,14 @@ class Level2 extends Level{
     for (let i = 0; i < this.game.bullets.length; i++) {
       this.game.bullets[i].run();
     }
+    for (let i = 0; i < this.game.explosiveBullets.length; i++) {
+      this.game.explosiveBullets[i].run();
+    }
+
+    for (let i = 0; i < this.game.bullets.length; i++) {
+  //    this.game.lockon[i].run();
+    }
+
 
     // some help text in the bottom left of the canvas
     this.game.context.save();
@@ -105,11 +113,11 @@ class Level2 extends Level{
     for(var i = this.game.enemies.length-1; i >= 0; i--){
       for(var j = this.game.bullets.length-1; j >= 0; j--){
         if(this.game.circlePointCollision(this.game.bullets[j].loc.x, this.game.bullets[j].loc.y, this.game.enemies[i].loc.x, this.game.enemies[i].loc.y, this.game.enemies[i].radius)){
-          this.game.bullets.splice(j, 1);
-          this.game.enemies[i].kill = true;
-          this.game.score = this.game.score + 1;
+          //this.game.bullets.splice(j, 1);
+        //  this.game.enemies[i].kill = true;
+        //  this.game.score = this.game.score + 1;
           if(this.game.score % 20 === 0){
-            this.game.bankValue = this.game.bankValue + 10;
+            //this.game.bankValue = this.game.bankValue + 10;
           }
         }
       }
