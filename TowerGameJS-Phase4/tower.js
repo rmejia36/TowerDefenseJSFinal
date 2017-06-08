@@ -87,6 +87,7 @@ class Tower {
         //  towerGame.bullets.push(b);
           if( this.ability != "ray" && this.ability!= "freeze"){
             //console.log("shoot");
+
             towerGame.bullets.push(b);
       }
         if(this.ability == "freeze"){
@@ -101,7 +102,6 @@ class Tower {
       if( k < 300 && towerGame.enemies.length != 0 && this.target.x != towerGame.canvas.mouseX){
       var rys = new LockOn(this.loc, this.target);
       rys.run();
-        console.log(this.findEnemyIndex());
       if(this.findEnemyIndex() < towerGame.enemies.length)
 
         towerGame.enemies[this.findEnemyIndex()].isLocked = true;//health -=  10;
