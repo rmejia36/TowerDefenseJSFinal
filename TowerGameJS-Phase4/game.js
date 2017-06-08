@@ -137,7 +137,7 @@ class Game {
     var fastForwardButton = document.getElementById('fastForward');
     fastForwardButton.addEventListener('click', function(){
       if (FRAME_RATE == 30){
-        FRAME_RATE = 100;
+        FRAME_RATE = 60;
         fastForwardButton.innerHTML = "Slow Down";
       } else {
         fastForwardButton.innerHTML = "Fast Forward";
