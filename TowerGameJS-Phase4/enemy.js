@@ -16,8 +16,8 @@ class Enemy {
     this.coolDown = 1000;
     this.towerLoc =  vector2d(0, 0);
     this.velVec;
-    this.increasedDamg = 18;
-    this.health = 2000;
+    this.increasedDamg = 75;
+    this.health = 1000;
     this.slowVel= this.initialVel - .8;
       // velocity factor
       this.damages = 0;
@@ -87,23 +87,28 @@ class Enemy {
       if(this.checkCollide(this, towerGame.bullets[h])){
         if(towerGame.bullets[h].ability == "normal"){
           //this.health = this.health - 100;
-          this.health = this.health - 1;
+          this.health = this.health - 500;
           //console.log(this.health)
           towerGame.bullets.splice(h, 1);
         } else if(towerGame.bullets[h].ability == "fast"){
-          this.health = this.health - 1;
+          this.health = this.health - 250;
         //  console.log(this.health)
           towerGame.bullets.splice(h, 1);
+        }else if(towerGame.bullets[h].ability == "freeze"){
+          this.health = this.health -1000;
+          console.log("asdfasdfa");
+        //  this.vel = this.initialVel - .8;
         }else if(towerGame.bullets[h].ability == "explosive"){
-            console.log("idk");
-            this.health = this.health - .1;
+
+            this.health = this.health - 100;
           //this.health = this.health - 10;
           if(this.health <= 0){
             this.kill = true;
           }
           this.locations = this.loc;
-
+            console.log("idk");
           towerGame.explosiveBullets.push(new Explosives(towerGame.bullets[h].loc));
+          console.log(towerGame.explosiveBullets.length);
           //towerGame.explosiveBullets.push(new Explosives(towerGame.bullets[h].loc));
           towerGame.bullets.splice(h, 1);
           //console.log("exp");
@@ -114,15 +119,15 @@ class Enemy {
   }
 
   if(this.isLocked){
-    this.damages = 1+ this.increasedDamg;
+    this.damages = this.damages + this.increasedDamg;
     this.health = this.health-this.increasedDamg;
   }
 
 
 
     for(let i = 0; i < towerGame.explosiveBullets.length; i++){
-      if(this.loc.dist(towerGame.explosiveBullets[i].loc) < 40){
-        this.health = this.health - 30;
+      if(this.loc.dist(towerGame.explosiveBullets[i].loc) < 70){
+        this.health = this.health - 100;
       }
       if(towerGame.explosiveBullets[i].kills == true ){
         towerGame.explosiveBullets.splice(i, 1);
@@ -132,16 +137,7 @@ class Enemy {
 
 
 
-  for(let t = 0; t < towerGame.towers.length; t++){
 
-    if(this.loc.dist(towerGame.towers[t].loc) <  100 && towerGame.towers[t].ability == "freeze"){
-      this.vel = this.initialVel - .8;
-      break;
-    } else {
-    //console.log("cancel freeze");
-    this.vel = this.initialVel;
-  }
-}
 //  console.log(this.health);
 if(this.health <= 0){
   this.kill = true;
