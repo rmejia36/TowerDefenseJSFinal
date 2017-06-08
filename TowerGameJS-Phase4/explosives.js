@@ -22,9 +22,10 @@ class Explosives{
     ctx.beginPath();
     if(this.radius <= 21){
      this.radius += 3;
+     console.log("sss");
 
     }  else {
-      console.log("sss");
+
       this.kills = true;
     }
 
